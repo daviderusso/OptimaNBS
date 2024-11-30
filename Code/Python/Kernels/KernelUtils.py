@@ -1,8 +1,6 @@
 import numpy as np
 import json
-
-max_val = 1.0  # kernel default max value
-min_val = 0.1  # kernel default min value
+import config_kernel_generator as config
 
 
 def generate_kernel_2d(w, h, generation_alg, min_val, max_val):
@@ -142,7 +140,13 @@ def generate_kernels_2d(alg, green_types, urban_challenges, sizes, ranges):
     for b_type in urban_challenges:
         kernel["K"][b_type] = {}
         for g_type in green_types:
-            min_val, max_val = ranges[b_type][g_type]  # Get range for current green type and urban challenge
+            try:
+                min_val, max_val = ranges[b_type][g_type]  # Get range for current green type and urban challenge
+            except:
+                # if ranges not defined get default ranges
+                min_val = config.min_val_default
+                max_val = config.max_val_default
+
             rows, cols = sizes[b_type][g_type]  # Get size for current green type
             k = generate_kernel_2d(rows, cols, alg, min_val, max_val)
             kernel["K"][b_type][g_type] = np.array(k).flatten().tolist()  # Flatten kernel to a list
@@ -151,38 +155,9 @@ def generate_kernels_2d(alg, green_types, urban_challenges, sizes, ranges):
 
 
 if __name__ == "__main__":
-    # GENERATE KERNEL
-
-    green_types = ["GreenWall", "GreenRoof", "StreetTree", "UrbanPark"]
-    urban_challenges = ["TempMax", "TempMin", "Pm10", "Pm2", "Fairness"]
-
-    alg = 3  # max to min
-
-    ranges = {"TempMax": {"GreenWall": [0.1, 2.7], "GreenRoof": [0.1, 2.0], "StreetTree": [0.1, 1.3],
-                          "UrbanPark": [0.1, 3.5]},
-              "TempMin": {"GreenWall": [0.1, 1.9], "GreenRoof": [0.1, 1.4], "StreetTree": [0.1, 0.7],
-                          "UrbanPark": [0.1, 2.5]},
-              "Pm10": {"GreenWall": [0.01, 12.90], "GreenRoof": [0.01, 6.45], "StreetTree": [0.01, 10.32],
-                       "UrbanPark": [0.01, 12.90]},
-              "Pm2": {"GreenWall": [0.01, 5.03], "GreenRoof": [0.01, 2.51], "StreetTree": [0.01, 4.02],
-                      "UrbanPark": [0.01, 5.03]},
-              "Fairness": {"GreenWall": [2.0, 6.0], "GreenRoof": [0, 2.0], "StreetTree": [0.1, 4.0],
-                           "UrbanPark": [4.0, 10.0]}
-              }
-
-    sizes = {"TempMax": {"GreenWall": [5, 5], "GreenRoof": [5, 5], "StreetTree": [5, 5],
-                         "UrbanPark": [5, 5]},
-             "TempMin": {"GreenWall": [3, 3], "GreenRoof": [3, 3], "StreetTree": [3, 3],
-                         "UrbanPark": [3, 3]},
-             "Pm10": {"GreenWall": [5, 5], "GreenRoof": [5, 5], "StreetTree": [3, 3],
-                      "UrbanPark": [7, 7]},
-             "Pm2": {"GreenWall": [5, 5], "GreenRoof": [5, 5], "StreetTree": [3, 3],
-                     "UrbanPark": [7, 7]},
-             "Fairness": {"GreenWall": [5, 5], "GreenRoof": [3, 3], "StreetTree": [3, 3],
-                          "UrbanPark": [11, 11]}
-             }
-
-    kernel = generate_kernels_2d(alg, green_types, urban_challenges, sizes, ranges)
-
-    with open("Kernels.json", 'w') as f:
+    # Generate kernels for each NBSs and Urban Challenges
+    kernel = generate_kernels_2d(config.alg_type, config.green_types, config.urban_challenges, config.sizes,
+                                 config.ranges)
+    # Save kernels in json format
+    with open(config.output_name, 'w') as f:
         json.dump(kernel, f)
