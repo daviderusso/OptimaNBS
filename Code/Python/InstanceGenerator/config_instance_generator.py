@@ -10,8 +10,8 @@ instance_format = ".json"
 
 raw = "_raw"
 
-cities = ['Bologna', 'Catania', 'Milan', 'Naples', 'Rome', 'Turin']
-# cities = ['Bologna']
+# cities = ['Bologna', 'Catania', 'Milan', 'Naples', 'Rome', 'Turin']
+cities = ['Bologna']
 
 # TempMax and TempMin data refer to the 19/07/
 dataName = ["LandUseGHS", "TempMax", "TempMin", "Pm10", "Pm2", "Fairness"]
@@ -27,18 +27,18 @@ splitLabel = ["XS", "S", "M", "L"]
 
 perc_to_be_valid = 0.25
 
-green_type = ["GreenWall", "GreenRoof", "StreetTree", "UrbanPark"]
+green_type = ["GreenWall", "GreenRoof", "StreetTree", "UrbanPark"] #NBSs considered
 
 # LANDUSE CONFIG
-forbidden_for_all = [4, 5, 21, 22, 23, 24, 25, 255]
-allowed_roof = [14, 15]
-allowed_wall = [11, 12, 13]
-allowed_for_all = [1, 3]
-pre_existent = {"GreenWall": [], "GreenRoof": [], "StreetTree": [2], "UrbanPark": []}
+forbidden_for_all = [4, 5, 21, 22, 23, 24, 25, 255] # value of tile in landuse that are forbidden for all green type
+allowed_roof = [14, 15] # value of tile in landuse that are allowed for green roofs
+allowed_wall = [11, 12, 13] # value of tile in landuse that are allowed for green walls
+allowed_for_all = [1, 3] # value of tile in landuse that are allowed for all NBSs
+pre_existent = {"GreenWall": [], "GreenRoof": [], "StreetTree": [2], "UrbanPark": []} # value of tile in landuse have to be considered as pre-existening NBSs
 
-urban_challenge = ["TempMax", "TempMin", "Pm10", "Pm2", "Fairness"]
+urban_challenge = ["TempMax", "TempMin", "Pm10", "Pm2", "Fairness"] #urban challenges considered
 
-# INSTANCES CREATION JSON STRING
+# INSTANCES CREATION JSON - key strings
 W = "W"
 H = "H"
 GT = "GreenType"

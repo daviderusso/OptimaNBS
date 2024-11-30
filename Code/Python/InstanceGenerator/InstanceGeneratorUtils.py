@@ -385,36 +385,36 @@ def create_instance_from_dict_map_data(dataframe, green_type, perc_to_be_valid):
 
 if __name__ == "__main__":
     # CLIP TIFF WITH SHP COMUNE E CLIP
-    # for d in config.dataName:
-    #     print("Data: " + d)
-    #     inRas = config.folderBase + config.folderData + d + config.image_format
-    #     for city in config.cities:
-    #         print(city)
-    #         inShp = config.folderBase + config.folderMunicipality + city + config.shp_format
-    #         outRas = config.folderBase + city + '/' + city + '_' + d + config.raw + config.image_format
-    #         clip_tif_by_shp(inRas, inShp, outRas)
-    #     print()
+    for d in config.dataName:
+        print("Data: " + d)
+        inRas = config.folderBase + config.folderData + d + config.image_format
+        for city in config.cities:
+            print(city)
+            inShp = config.folderBase + config.folderMunicipality + city + config.shp_format
+            outRas = config.folderBase + city + '/' + city + '_' + d + config.raw + config.image_format
+            clip_tif_by_shp(inRas, inShp, outRas)
+        print()
 
     # NORMALIZE AND RESHAPE THE MATRICES IN ORDER TO HAVE ALL MATRICES OF THE SAME SIZE
-    # for city in config.cities:
-    #     print(city)
-    #     reshape_matrices_instances(config.folderBase + city, city, config.dataName, config.data_normalizer, True)
-    #     print()
+    for city in config.cities:
+        print(city)
+        reshape_matrices_instances(config.folderBase + city, city, config.dataName, config.data_normalizer, True)
+        print()
 
     # SPLIT DATA OF EACH CITY IN TILES
-    # for city in config.cities:
-    #     print("-----" + city)
-    #     tile_folder = config.folderBase + city + config.folderTiles
-    #     os.makedirs(tile_folder, exist_ok=True)
-    #     for d in config.dataName:
-    #         print("--" + d)
-    #         for i in range(0, len(config.splitSize), 1):
-    #             splitL = config.splitLabel[i]
-    #             outFolder = tile_folder + splitL + "/"
-    #             os.makedirs(outFolder, exist_ok=True)
-    #             generate_split_images_by_size(config.splitSize[i], config.folderBase + city,
-    #                                           city + '_' + d + config.image_format, outFolder, splitL)
-    #     print()
+    for city in config.cities:
+        print("-----" + city)
+        tile_folder = config.folderBase + city + config.folderTiles
+        os.makedirs(tile_folder, exist_ok=True)
+        for d in config.dataName:
+            print("--" + d)
+            for i in range(0, len(config.splitSize), 1):
+                splitL = config.splitLabel[i]
+                outFolder = tile_folder + splitL + "/"
+                os.makedirs(outFolder, exist_ok=True)
+                generate_split_images_by_size(config.splitSize[i], config.folderBase + city,
+                                              city + '_' + d + config.image_format, outFolder, splitL)
+        print()
 
     # GENERATE INSTANCES
     for city in config.cities:
