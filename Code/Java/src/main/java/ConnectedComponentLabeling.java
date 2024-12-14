@@ -1,5 +1,3 @@
-package org.example;
-
 /**
  * This class implements the Connected Component Labeling (CCL) algorithm.
  * The algorithm identifies and labels distinct connected components in a binary matrix.

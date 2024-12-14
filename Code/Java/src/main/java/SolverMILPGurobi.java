@@ -1,5 +1,3 @@
-package org.example;
-
 import com.gurobi.gurobi.*;
 
 import java.util.HashMap;

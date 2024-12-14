@@ -1,5 +1,3 @@
-package org.example;
-
 /**
  * Represents a kernel structure associated with a specific GreenType and UrbanChallenge.
  * It includes the kernel's dimensions and its data matrix.

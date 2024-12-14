@@ -1,5 +1,3 @@
-package org.example;
-
 /**
  * This class represents a cell in a tile-based grid.
  * Each cell is defined by its row (`r`) and column (`c`) indices.
