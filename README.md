@@ -1,5 +1,7 @@
 # OptimaNBS
 
+<img src="demo_output.png" alt="drawing" width="600"/>
+
 ## Table Of Contents
 
 - [Description](#description)
@@ -10,7 +12,7 @@
 - [License](#license)
 
 ## Description
-Considering the relevance of Operational Research (OR) in urban planning, this project releases the source code implemented with reference to the manuscript "Optimal Placement of Nature-Based Solutions for Urban Challenges" to exploit OR tools and develop a flexible mathematical formulation for locating multiple Nature-Based Solutions (NBSs) while considering real-world constraints. Specifically, this code was used for the following contributions:
+This repository provides the source code implemented for the paper ["Optimal Placement of Nature-Based Solutions for Urban Challenges"](). Specifically, this code was used for the following contributions:
 
 - **Implementation of a Mixed-Integer Linear Programming (MILP) model:** This model optimizes the placement of various NBSs within urban environments, addressing metrics of different Urban Challenges (UCs), including ground temperature reduction, air quality improvement, and enhanced accessibility to green areas.
 - **Evaluation of the MILP formulation:** The model's effectiveness is tested using real-world case studies from Italian cities, selected for their diverse urban characteristics, climatic conditions, and geographic contexts.
