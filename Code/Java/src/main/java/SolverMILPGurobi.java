@@ -531,17 +531,13 @@ public class SolverMILPGurobi {
         // If a cluster is used, all locations within the cluster must be assigned the green type
         for (int c = 0; c < clusters.length; c++) {
             if (clusterSize.get(c) > 0) {
-                GRBLinExpr clusterSet = new GRBLinExpr();
                 for (int i = 0; i < instance.W; i++) {
                     for (int j = 0; j < instance.H; j++) {
                         if (clusteredMapPark[i][j] == c) {
-                            clusterSet.addTerm(1.0, x_var[UPid][i][j]);
+                            model.addConstr(x_var[UPid][i][j], GRB.EQUAL, clusters[c], "cluster_" + c + "_" +  UPid + "_" + i + "_" + j);
                         }
                     }
                 }
-                GRBLinExpr expr = new GRBLinExpr();
-                expr.addTerm(clusterSize.get(c), clusters[c]);
-                model.addConstr(clusterSet, GRB.EQUAL, expr, "cluster_" + c);
             }
         }
 
